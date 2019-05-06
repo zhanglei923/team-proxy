@@ -42,14 +42,22 @@ app.use(function (req, res, next) {
     res.set('About-rk-offlinedev', 'This Is Mocking Data!');
 
     if(/\.js$/.test(req.path) || /\.css$/.test(req.path)) {
-        console.log(req.path)
+        //console.dir( res)
+        for(let k in res){
+           // console.log(k, res[k)
+        }
+        //res.send('aaa')
+        //res.write('adsf')
+        //res.send('aaa')
+        next()
+        return;
     }
     next();
 });
 //静态资源转接到web
 let webPath = pathutil.resolve(__dirname, './website')
-app.use('/', express.static(webPath));//注意：必须在全局拦截器之后，否则拦截器无法运行
-
+app.use('/aaa', express.static(webPath));//注意：必须在全局拦截器之后，否则拦截器无法运行
+app.use('/bbb', express.static(pathutil.resolve(__dirname, '../rk-offlinedev')));//注意：必须在全局拦截器之后，否则拦截器无法运行
 
 var server = httpServer.listen(PORT, function() {
     var host = server.address().address;
