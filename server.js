@@ -40,18 +40,7 @@ app.all('*', function(req, res, next) {
 app.use(function (req, res, next) {
     res.set('Cache-Control', 'no-cache')
     res.set('About-rk-offlinedev', 'This Is Mocking Data!');
-
-    if(/\.js$/.test(req.path) || /\.css$/.test(req.path)) {
-        //console.dir( res)
-        for(let k in res){
-           // console.log(k, res[k)
-        }
-        //res.send('aaa')
-        //res.write('adsf')
-        //res.send('aaa')
-        next()
-        return;
-    }
+    console.dir(req.path);
     next();
 });
 //静态资源转接到web
